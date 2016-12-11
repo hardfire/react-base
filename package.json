@@ -5,6 +5,11 @@
   "main": "index.js",
   "author": "Avinash Kundaliya",
   "license": "MIT",
+  "scripts": {
+    "build": "NODE_ENV='production' webpack --optimize-minimize;NODE_ENV='production' babel -d dist app --copy-files",
+    "dev": "babel-node app/app.js --presets es2015",
+    "start": "node dist/app.js"
+  },
   "dependencies": {
     "koa": "^1.2.4",
     "koa-handlebars": "^1.0.0",
