@@ -12,8 +12,15 @@ class Application extends React.Component {
   }
 
   render() {
+    const bookmarkList = this.props.bookmarks.reduce((acc, bookmark) => {
+      acc.push(<li key={bookmark.key}> <a href={bookmark.url}> {bookmark.title} </a> </li>)
+      return acc
+    }, [])
     return(
-      <h1>Bookmarks</h1>
+      <div>
+        <h1>Bookmarks</h1>
+        <ul> {bookmarkList} </ul>
+      </div>
     )
   }
 }

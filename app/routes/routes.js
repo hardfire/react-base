@@ -12,16 +12,17 @@ import { initialState, reducer } from '../redux/reducers'
 import reactRoutes from './react-routes'
 
 // could as well come from a Store/API
-cons bookmarks = [
+const bookmarks = [
   { key: 'google-web-updates' , url: 'https://developers.google.com/web/updates/', title: 'Google Web Updates'},
   { key: 'moz-hacks' , url: 'https://hacks.mozilla.org/', title: 'Mozilla Hacks'}
 ]
 
 routes.get('/', function*(next) {
   const {redirect, props} = yield matchPromise({ routes: reactRoutes, location: this.request.path })
-  const preloadedState = Object.assign({}, initialState, {})
+  const preloadedState = Object.assign({}, initialState, { bookmarks })
   const store = createStore(reducer, preloadedState)
   const html = renderToString( <Provider store={store}><RouterContext {...props}/></Provider> )
+
   // Grab the initial state from our Redux store
   const finalState = store.getState()
   yield this.render("main", {
